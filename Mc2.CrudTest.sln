@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Application", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Domain", "src\Mc2.CrudTest.Domain\Mc2.CrudTest.Domain.csproj", "{627BACB7-22B3-4BBE-BFD9-3FA0E448ACB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Persistance", "src\Mc2.CrudTest.Persistance\Mc2.CrudTest.Persistance.csproj", "{5798F997-5B2C-4CFD-9DD6-986DD7F3D5E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Persistence", "src\Mc2.CrudTest.Persistence\Mc2.CrudTest.Persistence.csproj", "{5798F997-5B2C-4CFD-9DD6-986DD7F3D5E6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.UnitTest", "test\Mc2.CrudTest.UnitTest\Mc2.CrudTest.UnitTest.csproj", "{376698EF-ED11-407D-BFF3-8E0A755EE8E7}"
 EndProject
