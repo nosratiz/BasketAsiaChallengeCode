@@ -33,8 +33,7 @@ public class CustomerTest
     [Fact]
     public void GivenAValidCustomerId_ThenReturn_Customer()
     {
-        var customer = new Customer(Guid.NewGuid(), "John", "Doe", "johndoe@gmaill.com", "989107602786", "1234567890",
-            DateTime.Today);
+        var customer = UserFakeData.CreateUserCommand();
 
         _customerRepository
             .Setup(x => x.GetCustomerAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
@@ -60,4 +59,65 @@ public class CustomerTest
 
         act.Should().Throw<ArgumentException>();
     }
+
+
+    [Fact]
+    public async Task AddValidCustomer_ThenReturn_Customer()
+    {
+        var customer = UserFakeData.CreateUserCommand();
+
+        _customerRepository
+            .Setup(x => x.AddCustomerAsync(It.IsAny<Customer>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(customer);
+
+        var result = await _customerRepository.Object.AddCustomerAsync(customer, CancellationToken.None);
+
+        result.Should().NotBeNull();
+
+        result.Should().Be(customer);
+    }
+    
+    
+    [Fact]
+    public async Task UpdateValidCustomer_ThenReturn_Customer()
+    {
+        var customer = UserFakeData.CreateUserCommand();
+
+        _customerRepository
+            .Setup(x => x.UpdateCustomerAsync(It.IsAny<Customer>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(customer);
+
+        var result = await _customerRepository.Object.UpdateCustomerAsync(customer, CancellationToken.None);
+
+        result.Should().NotBeNull();
+
+        result.Should().Be(customer);
+    }
+    
+    [Fact]
+    public async Task DeleteValidCustomer_ThenReturn_Customer()
+    {
+        var customer = UserFakeData.CreateUserCommand();
+        
+        _customerRepository.Setup(x => x.AddCustomerAsync(It.IsAny<Customer>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(customer);
+
+        _customerRepository
+            .Setup(x => x.DeleteCustomerAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+            .Returns(Task.CompletedTask);
+
+        await _customerRepository.Object.DeleteCustomerAsync(customer.Id, CancellationToken.None);
+        
+        
+        _customerRepository
+            .Setup(x => x.GetCustomerAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+            .Throws(new CustomerNotFoundException(customer.Id));
+        
+        Action act = () => _customerRepository.Object.GetCustomerAsync(customer.Id, CancellationToken.None);
+        
+        act.Should().Throw<CustomerNotFoundException>();
+        
+    }
+    
+    
 }

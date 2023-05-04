@@ -22,20 +22,32 @@ public class CustomerService : ICustomerService
         return await Task.FromResult(customer);
     }
 
-    public async Task<Customer> AddCustomerAsync(Customer customer, CancellationToken cancellationToken)
+    public async Task<Customer> AddCustomerAsync(Customer createCustomer, CancellationToken cancellationToken)
     {
-        _customers.Add(customer.Id, customer);
+        _customers.Add(createCustomer.Id, createCustomer);
+
+        return await Task.FromResult(createCustomer);
+    }
+
+    public async Task<Customer> UpdateCustomerAsync(Customer updateCustomer, CancellationToken cancellationToken)
+    {
+        _customers.TryGetValue(updateCustomer.Id, out var customer);
+
+        if (customer is null) throw new CustomerNotFoundException(updateCustomer.Id);
+
+        _customers[customer.Id] = customer;
 
         return await Task.FromResult(customer);
     }
 
-    public Task<Customer> UpdateCustomerAsync(Customer customer, CancellationToken cancellationToken)
+    public async Task DeleteCustomerAsync(Guid id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
-    }
+        _customers.TryGetValue(id, out var customer);
 
-    public Task DeleteCustomerAsync(Guid id, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
+        if (customer is null) throw new CustomerNotFoundException(id);
+
+        _customers.Remove(customer.Id);
+
+        await Task.CompletedTask;
     }
 }

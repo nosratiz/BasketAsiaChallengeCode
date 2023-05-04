@@ -1,9 +1,16 @@
 using System.Collections;
+using Mc2.CrudTest.Domain.Entities;
 
 namespace Mc2.CrudTest.UnitTest;
 
 public class UserFakeData
 {
+    public static Customer CreateUserCommand()
+    {
+        return new Customer(Guid.NewGuid(), "John", "Doe", "johndoe@gmaill.com", "989107602786", "1234567890",
+            DateTime.Today);
+    }
+
     public class CreateUserTestData : IEnumerable<object[]>
     {
         public IEnumerator<object[]> GetEnumerator()
