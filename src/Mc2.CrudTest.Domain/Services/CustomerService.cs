@@ -17,15 +17,16 @@ public class CustomerService : ICustomerService
     {
         _customers.TryGetValue(id, out var customer);
 
-        if (customer is null)
-            throw new CustomerNotFoundException(id);
+        if (customer is null) throw new CustomerNotFoundException(id);
 
         return await Task.FromResult(customer);
     }
 
     public async Task<Customer> AddCustomerAsync(Customer customer, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        _customers.Add(customer.Id, customer);
+
+        return await Task.FromResult(customer);
     }
 
     public Task<Customer> UpdateCustomerAsync(Customer customer, CancellationToken cancellationToken)
