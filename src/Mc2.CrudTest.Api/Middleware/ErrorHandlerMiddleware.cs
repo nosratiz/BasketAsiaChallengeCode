@@ -1,6 +1,8 @@
 using System.Net;
-using System.Text.Json;
+using FluentValidation;
+using Mc2.CrudTest.Application.Common.Helper;
 using Mc2.CrudTest.Domain.Exceptions;
+using Newtonsoft.Json;
 
 namespace Mc2.CrudTest.Api.Middleware;
 
@@ -31,17 +33,20 @@ public class ErrorHandlerMiddleware
             response.StatusCode = error switch
             {
                 BusinessException
-                ValidationException
-                 =>
-                    (int)HttpStatusCode.BadRequest,
+                    =>
+                    (int) HttpStatusCode.BadRequest,
+                ValidationException =>
+                    (int) HttpStatusCode.BadRequest,
                 CustomerNotFoundException =>
-                    (int)HttpStatusCode.NotFound,
+                    (int) HttpStatusCode.NotFound,
                 UnauthorizedAccessException =>
-                    (int)HttpStatusCode.Unauthorized,
-                _ => (int)HttpStatusCode.InternalServerError
+                    (int) HttpStatusCode.Unauthorized,
+                _ => (int) HttpStatusCode.InternalServerError
             };
 
-            var result = JsonSerializer.Serialize(new { error?.Message });
+            var result = JsonConvert.SerializeObject(new ApiMessage {Message = error.Message});
+            
+            _logger.LogInformation(result);
 
             await response.WriteAsync(result);
         }

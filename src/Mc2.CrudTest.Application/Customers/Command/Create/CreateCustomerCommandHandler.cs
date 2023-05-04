@@ -14,8 +14,8 @@ public sealed class CreateCustomerCommandHandler : IRequestHandler<CreateCustome
     private readonly IValidator<CreateCustomerCommand> _validator;
 
     public CreateCustomerCommandHandler(ICustomerService customerService,
-     IMapper mapper, 
-     IValidator<CreateCustomerCommand> validator)
+        IMapper mapper,
+        IValidator<CreateCustomerCommand> validator)
     {
         _customerService = customerService;
         _mapper = mapper;
@@ -29,11 +29,13 @@ public sealed class CreateCustomerCommandHandler : IRequestHandler<CreateCustome
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors.First().ErrorMessage);
 
-        var customer = _mapper.Map<Customer>(request);
+        var customer = new Customer(Guid.NewGuid(), request.FirstName, request.LastName, request.Email,
+            request.PhoneNumber,
+            request.BankAccountNumber, request.DateOfBirth);
+        
 
         var result = await _customerService.AddCustomerAsync(customer, cancellationToken);
 
         return _mapper.Map<CustomerDto>(result);
-        
     }
 }

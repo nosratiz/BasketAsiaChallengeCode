@@ -1,0 +1,24 @@
+@baseUrl=http://localhost:5087
+
+
+GET {{baseUrl}}/api/customers
+Content-Type: application/json
+
+
+###
+GET {{baseUrl}}/api/customers/b05e5f02-dee8-42b1-af87-1e5e8708bfce
+Content-Type: application/json
+
+
+###
+POST {{baseUrl}}/api/customers
+Content-Type: application/json
+
+{
+  "firstName": "nima",
+  "lastName": "nosrat",
+   "email": "nima@gmail.com",
+   "phoneNumber":"09107602786",
+   "bankAccountNumber":"1212121212121212",
+   "DateOfBirth":"1990-01-01"
+}

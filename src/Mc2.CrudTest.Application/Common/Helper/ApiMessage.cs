@@ -8,6 +8,6 @@ public class ApiMessage
 
     public ApiMessage(string message) => Message = message;
 
-    public string Message { get; set; }
+    public string Message { get; set; } = null!;
 
 }

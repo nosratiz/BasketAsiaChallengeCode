@@ -30,12 +30,14 @@ public class CustomerService : ICustomerService
 
         if (customer is null) throw new CustomerNotFoundException(id);
 
-        return await Task.FromResult(customer);
+        return  customer;
     }
 
     public async Task<Customer> AddCustomerAsync(Customer createCustomer, CancellationToken cancellationToken)
     {
         await _context.Customers.AddAsync(createCustomer, cancellationToken);
+
+        await _context.SaveAsync(cancellationToken);
 
         return createCustomer;
     }
@@ -50,6 +52,8 @@ public class CustomerService : ICustomerService
 
         _mapper.Map(updateCustomer, customer);
 
+        await _context.SaveAsync(cancellationToken);
+
         return customer;
     }
 
@@ -62,6 +66,8 @@ public class CustomerService : ICustomerService
         if (customer is null) throw new CustomerNotFoundException(id);
 
         _context.Customers.Remove(customer);
+
+        await _context.SaveAsync(cancellationToken);
 
         await Task.CompletedTask;
     }
