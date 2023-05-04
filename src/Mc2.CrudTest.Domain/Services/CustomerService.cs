@@ -23,7 +23,7 @@ public class CustomerService : ICustomerService
         return await Task.FromResult(customer);
     }
 
-    public Task<Customer> AddCustomerAsync(Customer customer, CancellationToken cancellationToken)
+    public async Task<Customer> AddCustomerAsync(Customer customer, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
