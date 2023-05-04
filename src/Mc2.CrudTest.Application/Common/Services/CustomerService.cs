@@ -1,26 +1,32 @@
+using AutoMapper;
+using Mc2.CrudTest.Application.Common.Interfaces;
 using Mc2.CrudTest.Domain.Entities;
 using Mc2.CrudTest.Domain.Exceptions;
 using Mc2.CrudTest.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
-namespace Mc2.CrudTest.Domain.Services;
+namespace Mc2.CrudTest.Application.Services;
 
 public class CustomerService : ICustomerService
 {
-    private readonly IDictionary<Guid, Customer> _customers;
+    private readonly IMcTestContext _context;
+    private readonly IMapper _mapper;
 
-    public CustomerService(IDictionary<Guid, Customer> customers)
+    public CustomerService(IMcTestContext context, IMapper mapper)
     {
-        _customers = customers;
+        _context = context;
+        _mapper = mapper;
     }
 
     public async Task<List<Customer>> GetCustomerListAsync(CancellationToken cancellationToken)
-    {
-        return await Task.FromResult(_customers.Values.ToList());
-    }
+       => await _context.Customers.ToListAsync(cancellationToken);
+
 
     public async Task<Customer?> GetCustomerAsync(Guid id, CancellationToken cancellationToken)
     {
-        _customers.TryGetValue(id, out var customer);
+        var customer = await _context
+        .Customers
+        .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
         if (customer is null) throw new CustomerNotFoundException(id);
 
@@ -29,29 +35,33 @@ public class CustomerService : ICustomerService
 
     public async Task<Customer> AddCustomerAsync(Customer createCustomer, CancellationToken cancellationToken)
     {
-        _customers.Add(createCustomer.Id, createCustomer);
+        await _context.Customers.AddAsync(createCustomer, cancellationToken);
 
-        return await Task.FromResult(createCustomer);
+        return createCustomer;
     }
 
     public async Task<Customer> UpdateCustomerAsync(Customer updateCustomer, CancellationToken cancellationToken)
     {
-        _customers.TryGetValue(updateCustomer.Id, out var customer);
+        var customer = await _context
+        .Customers
+        .FirstOrDefaultAsync(x => x.Id == updateCustomer.Id, cancellationToken);
 
         if (customer is null) throw new CustomerNotFoundException(updateCustomer.Id);
 
-        _customers[customer.Id] = customer;
+        _mapper.Map(updateCustomer, customer);
 
-        return await Task.FromResult(customer);
+        return customer;
     }
 
     public async Task DeleteCustomerAsync(Guid id, CancellationToken cancellationToken)
     {
-        _customers.TryGetValue(id, out var customer);
+        var customer = await _context
+       .Customers
+       .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
         if (customer is null) throw new CustomerNotFoundException(id);
 
-        _customers.Remove(customer.Id);
+        _context.Customers.Remove(customer);
 
         await Task.CompletedTask;
     }
