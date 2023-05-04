@@ -13,6 +13,11 @@ public class CustomerService : ICustomerService
         _customers = customers;
     }
 
+    public async Task<List<Customer>> GetCustomerListAsync(CancellationToken cancellationToken)
+    {
+        return await Task.FromResult(_customers.Values.ToList());
+    }
+
     public async Task<Customer?> GetCustomerAsync(Guid id, CancellationToken cancellationToken)
     {
         _customers.TryGetValue(id, out var customer);

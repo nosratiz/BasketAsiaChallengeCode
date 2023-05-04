@@ -1,4 +1,3 @@
-using Mc2.CrudTest.Application.Common;
 using Mc2.CrudTest.Application.Common.Interfaces;
 using Mc2.CrudTest.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
