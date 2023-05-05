@@ -98,7 +98,7 @@ public class CustomerControllerTest : IntegrationTestBase
             FirstName = "nima",
             LastName = "nosrati",
             Email = "nima@gmai.com",
-            PhoneNumber = "09107602786",
+            PhoneNumber = "+18185338330",
             BankAccountNumber = "9823435664",
             DateOfBirth = DateTime.Now,
             Id = customerList!.First().Id
@@ -124,7 +124,7 @@ public class CustomerControllerTest : IntegrationTestBase
             FirstName = "nima2",
             LastName = "nosrati",
             Email = "nima2@gmai.com",
-            PhoneNumber = "09107602789",
+            PhoneNumber = "+18185228330",
             BankAccountNumber = new Random().Next(100000000, 999999999).ToString(),
             DateOfBirth = DateTime.Now
         });

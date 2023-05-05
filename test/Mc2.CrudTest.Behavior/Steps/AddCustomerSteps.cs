@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Mc2.CrudTest.Domain.Entities;
 using Mc2.CrudTest.Domain.Interfaces;
+using Mc2.CrudTest.Domain.ValueObjects;
 using Moq;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -40,7 +41,7 @@ public class AddCustomerSteps
         var bankAccountNumber = table.Rows[0]["BankAccountNumber"];
         var dateOfBirth = DateTime.Parse(table.Rows[0]["DateOfBirth"]);
         
-        var customer = new Customer(Guid.NewGuid(), firstName, lastName, email, phoneNumber, bankAccountNumber, dateOfBirth);
+        var customer = new Customer(Guid.NewGuid(), firstName, lastName, new Email(email), new PhoneNumber(phoneNumber), bankAccountNumber, dateOfBirth);
 
         _customerService.Setup(x => x.AddCustomerAsync(customer, It.IsAny<CancellationToken>()))
             .ReturnsAsync(customer);
@@ -59,7 +60,7 @@ public class AddCustomerSteps
         _customerService.Setup(x => x.GetCustomerListAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(new List<Customer>
             {
-                new(Guid.NewGuid(), "John", "Doe", "john@example.com", "123456789", "123456789", DateTime.Now)
+                new(Guid.NewGuid(), "John", "Doe", new Email("john@example.com"), new PhoneNumber("+18185778330"), "123456789", DateTime.Now)
             });
 
 

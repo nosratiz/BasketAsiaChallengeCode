@@ -2,6 +2,7 @@ using FluentAssertions;
 using Mc2.CrudTest.Domain.Entities;
 using Mc2.CrudTest.Domain.Exceptions;
 using Mc2.CrudTest.Domain.Interfaces;
+using Mc2.CrudTest.Domain.ValueObjects;
 using Moq;
 using Xunit;
 
@@ -54,7 +55,7 @@ public class CustomerTest
     {
         Action act = () =>
         {
-            _ = new Customer(id, firsName, lastName, email, phoneNumber, bankAccountNumber, dateOfBirth);
+            _ = new Customer(id, firsName, lastName, new Email(email), new PhoneNumber(phoneNumber), bankAccountNumber, dateOfBirth);
         };
 
         act.Should().Throw<ArgumentException>();

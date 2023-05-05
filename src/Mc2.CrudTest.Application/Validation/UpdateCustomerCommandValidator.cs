@@ -2,6 +2,7 @@ using FluentValidation;
 using Mc2.CrudTest.Application.Common.Interfaces;
 using Mc2.CrudTest.Application.Customers.Command.Update;
 using Microsoft.EntityFrameworkCore;
+using PhoneNumbers;
 
 namespace Mc2.CrudTest.Application.Validation;
 
@@ -71,7 +72,7 @@ public sealed class UpdateCustomerCommandValidator : AbstractValidator<UpdateCus
     private async Task<bool> BeUniqueEmail(UpdateCustomerCommand model, CancellationToken cancellationToken)
         => !await _context
         .Customers
-        .AnyAsync(x => x.Email == model.Email && x.Id != model.Id, cancellationToken);
+        .AnyAsync(x => x.Email.Value == model.Email && x.Id != model.Id, cancellationToken);
 
 
     private async Task<bool> BeUniqueBankAccountNumber(UpdateCustomerCommand model, CancellationToken cancellationToken)
@@ -83,5 +84,21 @@ public sealed class UpdateCustomerCommandValidator : AbstractValidator<UpdateCus
     private async Task<bool> BeUniquePhoneNumber(UpdateCustomerCommand model, CancellationToken cancellationToken)
         => !await _context
         .Customers
-        .AnyAsync(x => x.PhoneNumber == model.PhoneNumber && x.Id != model.Id, cancellationToken);
+        .AnyAsync(x => x.PhoneNumber.Value == model.PhoneNumber && x.Id != model.Id, cancellationToken);
+    
+    
+    private bool CheckPhoneNumber(string phoneNumber)
+    {
+        PhoneNumberUtil phoneUtil = PhoneNumberUtil.GetInstance(); 
+        
+        try
+        {
+            var number = phoneUtil.Parse(phoneNumber, "US");
+            return phoneUtil.IsValidNumber(number);
+        }
+        catch (NumberParseException)
+        {
+            return false;
+        }
+    }
 }

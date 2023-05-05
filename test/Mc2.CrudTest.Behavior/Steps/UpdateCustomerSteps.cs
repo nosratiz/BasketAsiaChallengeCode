@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Mc2.CrudTest.Domain.Entities;
 using Mc2.CrudTest.Domain.Interfaces;
+using Mc2.CrudTest.Domain.ValueObjects;
 using Moq;
 using TechTalk.SpecFlow;
 
@@ -27,7 +28,7 @@ public class UpdateCustomerSteps
         var bankAccountNumber = table.Rows[0]["BankAccountNumber"];
         var dateOfBirth = DateTime.Parse(table.Rows[0]["DateOfBirth"]);
         
-        var customer = new Customer(id, firstName, lastName, email, phoneNumber, bankAccountNumber, dateOfBirth);
+        var customer = new Customer(id, firstName, lastName, new Email(email), new PhoneNumber(phoneNumber), bankAccountNumber, dateOfBirth);
 
         _customerService.Setup(x => x.AddCustomerAsync(customer, It.IsAny<CancellationToken>()))
             .ReturnsAsync(customer);
@@ -50,7 +51,7 @@ public class UpdateCustomerSteps
         var bankAccountNumber = table.Rows[0]["BankAccountNumber"];
         var dateOfBirth = DateTime.Parse(table.Rows[0]["DateOfBirth"]);
         
-        var customer = new Customer(id, firstName, lastName, email, phoneNumber, bankAccountNumber, dateOfBirth);
+        var customer = new Customer(id, firstName, lastName, new Email(email), new PhoneNumber(phoneNumber), bankAccountNumber, dateOfBirth);
         
         _customerService.Setup(x => x.UpdateCustomerAsync(customer, It.IsAny<CancellationToken>()))
             .ReturnsAsync(customer);
@@ -70,8 +71,8 @@ public class UpdateCustomerSteps
         
         _customerService.Setup(x => x.GetCustomerAsync(id, It.IsAny<CancellationToken>()))
             .ReturnsAsync(new Customer(id, table.Rows[0]["FirstName"], 
-                table.Rows[0]["LastName"], table.Rows[0]["Email"], 
-                table.Rows[0]["PhoneNumber"], table.Rows[0]["BankAccountNumber"], 
+                table.Rows[0]["LastName"], new Email(table.Rows[0]["Email"]), 
+                new PhoneNumber(table.Rows[0]["PhoneNumber"]), table.Rows[0]["BankAccountNumber"], 
                 DateTime.Parse(table.Rows[0]["DateOfBirth"])));
         
         var customerResult = await _customerService.Object.GetCustomerAsync(id, CancellationToken.None);

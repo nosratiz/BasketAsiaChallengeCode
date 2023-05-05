@@ -16,20 +16,25 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
             .IsRequired()
             .HasMaxLength(150);
 
-        builder.Property(e => e.Email)
-            .IsRequired().HasMaxLength(254);
+        builder.OwnsOne(c => c.Email, e =>
+        {
+            e.Property(p => p.Value)
+                .HasColumnName("Email")
+                .HasMaxLength(254);
+        });
 
-        builder.HasIndex(e => e.Email).IsUnique();
+        builder.OwnsOne(c => c.PhoneNumber, p =>
+        {
+            p.Property(p => p.Value)
+                .HasColumnName("PhoneNumber")
+                .HasMaxLength(20);
+        });
 
 
         builder.Property(e => e.BankAccountNumber)
             .IsRequired()
             .HasMaxLength(18);
-
-
-        builder.Property(e => e.PhoneNumber)
-            .IsRequired()
-            .HasMaxLength(20);
+        
 
 
         builder.Property(e => e.DateOfBirth)

@@ -1,7 +1,9 @@
 using FluentValidation;
 using Mc2.CrudTest.Application.Common.Interfaces;
 using Mc2.CrudTest.Application.Customers.Command.Create;
+using Mc2.CrudTest.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
+using PhoneNumbers;
 
 namespace Mc2.CrudTest.Application.Validation;
 
@@ -39,6 +41,8 @@ public sealed class CreateCustomerCommandValidator : AbstractValidator<CreateCus
             .NotEmpty()
             .MinimumLength(8)
             .MaximumLength(20)
+            .Must(CheckPhoneNumber)
+            .WithMessage("The specified phone number is not valid.")
             .MustAsync(BeUniquePhoneNumber)
             .WithMessage("The specified phone number already exists.");
 
@@ -58,9 +62,12 @@ public sealed class CreateCustomerCommandValidator : AbstractValidator<CreateCus
     }
 
     private async Task<bool> BeUniqueEmail(string email, CancellationToken cancellationToken)
-        => !await _context
+
+    {
+        return !await _context
             .Customers
-            .AnyAsync(x => x.Email == email, cancellationToken);
+            .AnyAsync(x => x.Email.Value == email, cancellationToken);
+    }
 
     private async Task<bool> BeUniqueCustomer(CreateCustomerCommand model, CancellationToken cancellationToken)
         => !await _context
@@ -80,7 +87,23 @@ public sealed class CreateCustomerCommandValidator : AbstractValidator<CreateCus
     private async Task<bool> BeUniquePhoneNumber(string phoneNumber, CancellationToken cancellationToken)
         => !await _context
             .Customers
-            .AnyAsync(x => x.PhoneNumber == phoneNumber, cancellationToken);
+            .AnyAsync(x => x.PhoneNumber.Value == phoneNumber, cancellationToken);
+
+
+    private bool CheckPhoneNumber(string phoneNumber)
+    {
+        PhoneNumberUtil phoneUtil = PhoneNumberUtil.GetInstance(); 
+        
+        try
+        {
+            var number = phoneUtil.Parse(phoneNumber, "US");
+            return phoneUtil.IsValidNumber(number);
+        }
+        catch (NumberParseException)
+        {
+            return false;
+        }
+    }
 
 
    

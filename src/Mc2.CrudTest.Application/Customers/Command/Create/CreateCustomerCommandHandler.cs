@@ -3,6 +3,7 @@ using FluentValidation;
 using Mc2.CrudTest.Application.Customers.Dto;
 using Mc2.CrudTest.Domain.Entities;
 using Mc2.CrudTest.Domain.Interfaces;
+using Mc2.CrudTest.Domain.ValueObjects;
 using MediatR;
 
 namespace Mc2.CrudTest.Application.Customers.Command.Create;
@@ -29,8 +30,8 @@ public sealed class CreateCustomerCommandHandler : IRequestHandler<CreateCustome
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors.First().ErrorMessage);
 
-        var customer = new Customer(Guid.NewGuid(), request.FirstName, request.LastName, request.Email,
-            request.PhoneNumber,
+        var customer = new Customer(Guid.NewGuid(), request.FirstName, request.LastName, new Email(request.Email),
+            new PhoneNumber(request.PhoneNumber),
             request.BankAccountNumber, request.DateOfBirth);
         
 

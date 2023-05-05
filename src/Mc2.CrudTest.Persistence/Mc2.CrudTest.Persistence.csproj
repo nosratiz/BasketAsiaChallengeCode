@@ -28,4 +28,8 @@
       <ProjectReference Include="..\Mc2.CrudTest.Application\Mc2.CrudTest.Application.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Migrations\" />
+    </ItemGroup>
+
 </Project>

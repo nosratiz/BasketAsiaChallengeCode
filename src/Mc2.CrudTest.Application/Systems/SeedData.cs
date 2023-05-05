@@ -1,5 +1,6 @@
 using Mc2.CrudTest.Application.Common.Interfaces;
 using Mc2.CrudTest.Domain.Entities;
+using Mc2.CrudTest.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mc2.CrudTest.Application.Systems;
@@ -21,8 +22,8 @@ public sealed class SeedData
 
             for (var i = 0; i < 10; i++)
             {
-                customers.Add(new Customer(Guid.NewGuid(), $"John{i}", $"Doe{i}", $"johnDoe{i}@gmail.com",
-                 $"0912345678{i}", $"12345678{i}", DateTime.Now));
+                customers.Add(new Customer(Guid.NewGuid(), $"John{i}", $"Doe{i}", new Email($"johnDoe{i}@gmail.com"),
+                 new PhoneNumber($"+1818577833{i}"), $"12345678{i}", DateTime.Now));
             }
             await _context.Customers.AddRangeAsync(customers, cancellationToken);
 

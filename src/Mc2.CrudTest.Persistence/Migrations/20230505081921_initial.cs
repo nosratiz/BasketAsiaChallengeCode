@@ -29,12 +29,6 @@ namespace Mc2.CrudTest.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customers_Email",
-                table: "Customers",
-                column: "Email",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Customers_FirstName_LastName_DateOfBirth",
                 table: "Customers",
                 columns: new[] { "FirstName", "LastName", "DateOfBirth" },
