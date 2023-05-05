@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.UnitTest", "te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.IntegrationTest", "test\Mc2.CrudTest.IntegrationTest\Mc2.CrudTest.IntegrationTest.csproj", "{13D7795A-0505-48B5-AA3D-A3BEB98179B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Behavior", "test\Mc2.CrudTest.Behavior\Mc2.CrudTest.Behavior.csproj", "{939E2A1D-EB66-4049-9978-CC71C7451754}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{13D7795A-0505-48B5-AA3D-A3BEB98179B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13D7795A-0505-48B5-AA3D-A3BEB98179B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13D7795A-0505-48B5-AA3D-A3BEB98179B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{939E2A1D-EB66-4049-9978-CC71C7451754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{939E2A1D-EB66-4049-9978-CC71C7451754}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{939E2A1D-EB66-4049-9978-CC71C7451754}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{939E2A1D-EB66-4049-9978-CC71C7451754}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,5 +69,6 @@ Global
 		{5798F997-5B2C-4CFD-9DD6-986DD7F3D5E6} = {22093F43-0298-4448-957E-250786FCE543}
 		{376698EF-ED11-407D-BFF3-8E0A755EE8E7} = {EB29A961-D4B7-4554-80A2-B90558B1217D}
 		{13D7795A-0505-48B5-AA3D-A3BEB98179B3} = {EB29A961-D4B7-4554-80A2-B90558B1217D}
+		{939E2A1D-EB66-4049-9978-CC71C7451754} = {EB29A961-D4B7-4554-80A2-B90558B1217D}
 	EndGlobalSection
 EndGlobal
