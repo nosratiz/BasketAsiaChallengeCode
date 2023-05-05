@@ -1,0 +1,4 @@
+a few things before start to read a code . I'm completely new to this DDD BDD stuff .
+but with this task I learned a few things about BDD and DDD .
+I just read one or two articles about DDD and BDD . I'm not sure whether I'm right or wrong .
+I only have experience on TDD and CQRS pattern.
