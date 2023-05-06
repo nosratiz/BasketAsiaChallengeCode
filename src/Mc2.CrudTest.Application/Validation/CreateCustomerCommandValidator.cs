@@ -1,6 +1,7 @@
 using FluentValidation;
 using Mc2.CrudTest.Application.Common.Interfaces;
 using Mc2.CrudTest.Application.Customers.Command.Create;
+using Mc2.CrudTest.Domain.Validators;
 using Mc2.CrudTest.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using PhoneNumbers;
@@ -92,17 +93,7 @@ public sealed class CreateCustomerCommandValidator : AbstractValidator<CreateCus
 
     private bool CheckPhoneNumber(string phoneNumber)
     {
-        PhoneNumberUtil phoneUtil = PhoneNumberUtil.GetInstance(); 
-        
-        try
-        {
-            var number = phoneUtil.Parse(phoneNumber, "US");
-            return phoneUtil.IsValidNumber(number);
-        }
-        catch (NumberParseException)
-        {
-            return false;
-        }
+        return MobileValidator.IsValid(phoneNumber);
     }
 
 
