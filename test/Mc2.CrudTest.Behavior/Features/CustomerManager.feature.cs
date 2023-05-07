@@ -107,13 +107,14 @@ namespace Mc2.CrudTest.Behavior.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Create Read Edit Delete Customer", Skip="Ignored")]
+        [Xunit.SkippableFactAttribute(DisplayName="Create Read Edit Delete Customer")]
         [Xunit.TraitAttribute("FeatureTitle", "Create Read Edit Delete Customer")]
         [Xunit.TraitAttribute("Description", "Create Read Edit Delete Customer")]
+        [Xunit.TraitAttribute("Category", "CreateReadEditDeleteCustomer")]
         public void CreateReadEditDeleteCustomer()
         {
             string[] tagsOfScenario = new string[] {
-                    "ignore"};
+                    "CreateReadEditDeleteCustomer"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create Read Edit Delete Customer", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 13
@@ -181,7 +182,8 @@ namespace Mc2.CrudTest.Behavior.Features
                             "01-JAN-2000",
                             "IR000000000000001"});
 #line 21
-        testRunner.When("user creates a customer with following data by sending \'Create Customer Command\'", ((string)(null)), table5, "When ");
+        testRunner.When("user creates a customer with following data by sending \' Create Customer Command\'" +
+                        "", ((string)(null)), table5, "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "Code"});

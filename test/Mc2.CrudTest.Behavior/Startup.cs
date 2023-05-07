@@ -14,7 +14,7 @@ public class Startup
 
         services.AddSingleton(new Settings
         {
-            ApplicationUrl = new Uri("https://localhost:5001")
+            ApplicationUrl = new Uri("http://localhost:5129")
         });
 
         services.AddScoped<IDriverFixture, DriverFixture>();

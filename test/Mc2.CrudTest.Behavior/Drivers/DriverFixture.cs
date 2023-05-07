@@ -12,7 +12,7 @@ public interface IDriverFixture
     IWebDriver Driver { get; }
 }
 
-public class DriverFixture : IDriverFixture
+public class DriverFixture : IDriverFixture , IDisposable
 {
     private readonly IWebDriver _driver;
 
@@ -29,5 +29,10 @@ public class DriverFixture : IDriverFixture
     {
         new DriverManager().SetUpDriver(new ChromeConfig());
         return new ChromeDriver();
+    }
+
+    public void Dispose()
+    {
+        _driver.Dispose();
     }
 }

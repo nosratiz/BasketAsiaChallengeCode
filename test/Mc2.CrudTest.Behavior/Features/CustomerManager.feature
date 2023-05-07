@@ -18,7 +18,7 @@
         Then user can query to get all customers and must have "1" record with following data
           | FirstName | LastName | Email        | PhoneNumber   | DateOfBirth | BankAccountNumber |
           | John      | Doe      | john@doe.com | +989121234567 | 01-JAN-2000 | IR000000000000001 |
-        When user creates a customer with following data by sending 'Create Customer Command'
+        When user creates a customer with following data by sending ' Create Customer Command'
           | FirstName | LastName | Email        | PhoneNumber   | DateOfBirth | BankAccountNumber |
           | John      | Doe      | john@doe.com | +989121234567 | 01-JAN-2000 | IR000000000000001 |
         Then user must receive error codes
