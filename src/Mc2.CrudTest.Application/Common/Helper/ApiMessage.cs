@@ -6,8 +6,12 @@ public class ApiMessage
     {
     }
 
-    public ApiMessage(string message) => Message = message;
+    public ApiMessage(int code, string message)
+    {
+        Code = code;
+        Message = message;
+    }
 
+    public int Code { get; set; }
     public string Message { get; set; } = null!;
-
 }

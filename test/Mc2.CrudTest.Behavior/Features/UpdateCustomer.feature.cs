@@ -101,7 +101,7 @@ namespace Mc2.CrudTest.Behavior.Features
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "FirstName",
                             "LastName",
@@ -109,7 +109,7 @@ namespace Mc2.CrudTest.Behavior.Features
                             "PhoneNumber",
                             "BankAccountNumber",
                             "DateOfBirth"});
-                table2.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "C469FB46-01B8-4B8F-8E7D-CEF3AFD14A59",
                             "John",
                             "Doe",
@@ -118,9 +118,9 @@ namespace Mc2.CrudTest.Behavior.Features
                             "1234567890",
                             "01-03-1993"});
 #line 8
- testRunner.Given("I have a customer with the following attributes:", ((string)(null)), table2, "Given ");
+ testRunner.Given("I have a customer with the following attributes:", ((string)(null)), table10, "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "FirstName",
                             "LastName",
@@ -128,7 +128,7 @@ namespace Mc2.CrudTest.Behavior.Features
                             "PhoneNumber",
                             "BankAccountNumber",
                             "DateOfBirth"});
-                table3.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "C469FB46-01B8-4B8F-8E7D-CEF3AFD14A59",
                             "nima",
                             "nosrati",
@@ -137,9 +137,9 @@ namespace Mc2.CrudTest.Behavior.Features
                             "1234567890",
                             "01-03-1993"});
 #line 12
-    testRunner.When("I update the customer with the following attributes:", ((string)(null)), table3, "When ");
+    testRunner.When("I update the customer with the following attributes:", ((string)(null)), table11, "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "FirstName",
                             "LastName",
@@ -147,7 +147,7 @@ namespace Mc2.CrudTest.Behavior.Features
                             "PhoneNumber",
                             "BankAccountNumber",
                             "DateOfBirth"});
-                table4.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "C469FB46-01B8-4B8F-8E7D-CEF3AFD14A59",
                             "nima",
                             "nosrati",
@@ -156,7 +156,7 @@ namespace Mc2.CrudTest.Behavior.Features
                             "1234567890",
                             "01-03-1993"});
 #line 16
-    testRunner.Then("the customer should be updated with the following attributes:", ((string)(null)), table4, "Then ");
+    testRunner.Then("the customer should be updated with the following attributes:", ((string)(null)), table12, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
