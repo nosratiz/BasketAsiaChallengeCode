@@ -5,7 +5,7 @@
 
 <div class="text-center">
 
-    <a type="button" id="lnkAddCustomer" class="btn btn-primary" href="/Home/AddCustomer">Add Customer</a>
+    <a type="button" id="lnkAddCustomer" class="btn btn-primary" asp-action="AddCustomer">Add Customer</a>
 
     <table id="tblCustomers" class="table table-striped">
         <thead>
@@ -29,8 +29,8 @@
                 <td>@customer.PhoneNumber</td>
                 <td>@customer.DateOfBirth</td>
                 <td>@customer.BankAccountNumber</td>
-                <td> <a type="button"  class="btn btn-primary"  id="EditBtn"  asp-action="EditCustomer" asp-route-id="@customer.Id">Edit</a>
-                <td> <a type="button"  class="btn btn-danger"  id="DeleteBtn"  asp-action="DeleteCustomer" asp-route-id="@customer.Id">Delete</a></td>
+                <td> <a type="button"  class="btn btn-primary"  id="btnEdit"  asp-action="EditCustomer" asp-route-id="@customer.Id">Edit</a>
+                <td> <a type="button"  class="btn btn-danger"  id="btnDelete"  asp-action="DeleteCustomer" asp-route-id="@customer.Id">Delete</a></td>
             </tr>
         }
         </tbody>

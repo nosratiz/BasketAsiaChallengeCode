@@ -3,6 +3,7 @@ using FluentValidation;
 using Mc2.CrudTest.Application.Customers.Dto;
 using Mc2.CrudTest.Domain.Entities;
 using Mc2.CrudTest.Domain.Interfaces;
+using Mc2.CrudTest.Domain.ValueObjects;
 using MediatR;
 
 namespace Mc2.CrudTest.Application.Customers.Command.Update;
@@ -28,9 +29,8 @@ public sealed class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustome
 
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors.First().ErrorMessage);
-
-        var customer = _mapper.Map<Customer>(request);
-
+        
+        var customer=_mapper.Map<Customer>(request);
         var result = await _customerService.UpdateCustomerAsync(customer, cancellationToken);
 
         return _mapper.Map<CustomerDto>(result);

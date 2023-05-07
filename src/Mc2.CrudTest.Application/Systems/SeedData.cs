@@ -20,11 +20,9 @@ public sealed class SeedData
         {
             var customers = new List<Customer>();
 
-            for (var i = 0; i < 10; i++)
-            {
-                customers.Add(new Customer(Guid.NewGuid(), $"John{i}", $"Doe{i}", new Email($"johnDoe{i}@gmail.com"),
-                 new PhoneNumber($"+1818577833{i}"), $"12345678{i}", DateTime.Now));
-            }
+            customers.Add(new Customer(Guid.NewGuid(), $"John", $"Doe", new Email($"johnDoe@gmail.com"),
+             new PhoneNumber($"+989121234567"), $"12345678", DateTime.Now));
+
             await _context.Customers.AddRangeAsync(customers, cancellationToken);
 
             await _context.SaveAsync(cancellationToken);

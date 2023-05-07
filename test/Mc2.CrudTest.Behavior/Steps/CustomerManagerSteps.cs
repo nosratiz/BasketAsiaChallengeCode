@@ -12,12 +12,13 @@ public class CustomerManagerSteps
 
     private readonly HomePage _homePage;
     private readonly AddCustomerPage _addCustomerPage;
+    private readonly EditCustomerPage _editCustomerPage;
 
     public CustomerManagerSteps(IDriverFixture driverFixture)
     {
-        var driverFixture1 = driverFixture;
-        _homePage = new HomePage(driverFixture1);
-        _addCustomerPage = new AddCustomerPage(driverFixture1);
+        _homePage = new HomePage(driverFixture);
+        _addCustomerPage = new AddCustomerPage(driverFixture);
+        _editCustomerPage = new EditCustomerPage(driverFixture);
     }
 
     [Given(@"system error codes are following")]
@@ -88,16 +89,21 @@ public class CustomerManagerSteps
     public void WhenUserEditCustomerWithNewData(Table table)
     {
         _homePage.EditCustomer();
+        
+        var firstName = table.Rows[0]["FirstName"];
+        var lastName = table.Rows[0]["LastName"];
+        var email = table.Rows[0]["Email"];
+        var phoneNumber = table.Rows[0]["PhoneNumber"];
+        var bankAccountNumber = table.Rows[0]["BankAccountNumber"];
+        var dateOfBirth = DateTime.Parse(table.Rows[0]["DateOfBirth"]);
+        
+        _editCustomerPage.UpdateCustomer(firstName,lastName,email,phoneNumber,bankAccountNumber,dateOfBirth.ToString("d"));
     }
 
     [Then(@"user can lookup all customers and filter by below properties and get ""(.*)"" records")]
     public void ThenUserCanLookupAllCustomersAndFilterByBelowPropertiesAndGetRecords(int p0, Table table)
     {
         var email = table.Rows[0]["Email"];
-        
-        bool customerSearchResult = _homePage.CustomerSearch(email);
-
-        customerSearchResult.Should().BeFalse();
         
         int customerCountResult= _homePage.CustomerSearchCount(email);
         

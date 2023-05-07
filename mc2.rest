@@ -18,7 +18,21 @@ Content-Type: application/json
   "firstName": "nima",
   "lastName": "nosrat",
    "email": "nima@gmail.com",
-   "phoneNumber":"09107602786",
+   "phoneNumber":"+989107602786",
    "bankAccountNumber":"1212121212121212",
    "DateOfBirth":"1990-01-01"
 }
+
+###
+PUT {{baseUrl}}/api/customers
+Content-Type: application/json
+
+{
+    "id": "c204f455-b375-48cd-950c-67dce28eab30",
+    "firstName": "jane",
+    "lastName": "Doe",
+    "email": "jane@doe.com",
+    "phoneNumber": "+989121234567",
+    "bankAccountNumber": "IR000000000000001",
+    "dateOfBirth": "2000-01-01T00:00:00"
+  }

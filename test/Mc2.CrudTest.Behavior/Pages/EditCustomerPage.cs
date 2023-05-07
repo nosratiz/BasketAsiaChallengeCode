@@ -11,8 +11,8 @@ public class EditCustomerPage
     {
         _driverFixture = driverFixture;
     }
-    
-    IWebElement txtId => _driverFixture.Driver.FindElement(By.Id("txtId"));
+
+    IWebElement TxtId => _driverFixture.Driver.FindElement(By.Id("txtId"));
     IWebElement TxtFirstName => _driverFixture.Driver.FindElement(By.Id("txtFirstName"));
 
     IWebElement TxtLastName => _driverFixture.Driver.FindElement(By.Id("txtLastName"));
@@ -31,8 +31,12 @@ public class EditCustomerPage
     public void UpdateCustomer(string firstName, string lastName, string email, string phoneNumber, string bankAccount,
         string dateOfBirth)
     {
+        
+        
+        
         TxtFirstName.Clear();
         TxtFirstName.SendKeys(firstName);
+        TxtLastName.Clear();
         TxtLastName.SendKeys(lastName);
         TxtEmail.Clear();
         TxtEmail.SendKeys(email);

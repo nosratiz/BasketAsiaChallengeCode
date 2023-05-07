@@ -9,7 +9,7 @@ public interface ICustomerWebServices
    
     Task<CustomerDto?> GetCustomerAsync(Guid id, CancellationToken cancellationToken);
     
-    Task<CustomerDto?> AddCustomerAsync(CreateCustomerDto customer, CancellationToken cancellationToken);
+    Task<CreateCustomerViewModel> AddCustomerAsync(CreateCustomerDto customer, CancellationToken cancellationToken);
     
     Task<CustomerDto?> UpdateCustomerAsync(UpdateCustomerDto customer, CancellationToken cancellationToken);
     

@@ -14,7 +14,7 @@ public class HomePage
 
     IWebElement LnkAddCustomer => _driverFixture.Driver.FindElement(By.Id("lnkAddCustomer"));
 
-    IWebElement TblCustomers => _driverFixture.Driver.FindElement(By.Id("tblCustomers"));
+    private IWebElement TblCustomers => _driverFixture.Driver.FindElement(By.Id("tblCustomers"));
 
     public void ClickAddCustomer()
     {
@@ -23,13 +23,16 @@ public class HomePage
 
     public bool CountCustomers(int count)
     {
-        return TblCustomers.FindElements(By.TagName("tbody>tr")).Count == count;
+        //since we use on tr in header we need to subtract 1
+        int resultCount= TblCustomers.FindElements(By.TagName("tr")).Count - 1;
+        return resultCount == count;
     }
     
     public bool CustomerSearch( string email)
     {
         //since email is unique we can search by email
-        var result = TblCustomers.FindElements(By.TagName("tbody>tr"));
+        var result = TblCustomers.FindElements(By.TagName("tbody"));
+       
         foreach (var row in result)
         {
             var cells = row.FindElements(By.TagName("td"));
@@ -44,17 +47,18 @@ public class HomePage
 
     public int CustomerSearchCount(string email)
     {
-        var result = TblCustomers.FindElements(By.TagName("tbody>tr"));
+        var result = TblCustomers.FindElements(By.TagName("tbody"));
+        int count = 0;
         foreach (var row in result)
         {
             var cells = row.FindElements(By.TagName("td"));
             if (cells[2].Text == email )
             {
-                return cells.Count;
+                count++;
             }
         }
-        
-        return 0;
+
+        return count;
     }
     
     IWebElement BtnEdit => _driverFixture.Driver.FindElement(By.Id("btnEdit"));

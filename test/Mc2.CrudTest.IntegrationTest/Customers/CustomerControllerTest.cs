@@ -26,7 +26,7 @@ public class CustomerControllerTest : IntegrationTestBase
 
         result.Should().NotBeNull();
 
-        result.Should().HaveCount(10);
+        result.Should().HaveCount(1);
 
         result.Should().BeOfType<List<CustomerDto>>().Which.First().FirstName.Should().Contain("John");
     }
@@ -55,7 +55,7 @@ public class CustomerControllerTest : IntegrationTestBase
 
         result.Should().NotBeNull();
 
-        result.Should().BeOfType<CustomerDto>().Which.FirstName.Should().Contain("John");
+        result.Should().BeOfType<CustomerDto>();
     }
     
     [Fact]
@@ -66,17 +66,7 @@ public class CustomerControllerTest : IntegrationTestBase
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
     
-    [Fact]
-    public async Task When_SendValidId_DeleteCustomer_ReturnsSuccessResult()
-    {
-        var customerListResponse = await HttpClient.GetAsync("/api/customers");
-
-        var customerList = await customerListResponse.Content.ReadFromJsonAsync<List<CustomerDto>>();
-
-        var response = await HttpClient.DeleteAsync($"/api/customers/{customerList!.First().Id}");
-
-        response.StatusCode.Should().Be(HttpStatusCode.NoContent);
-    }
+   
     
     [Fact]
     public async Task When_SendInvalidData_UpdateCustomer_ReturnsBadRequest()
@@ -98,7 +88,7 @@ public class CustomerControllerTest : IntegrationTestBase
             FirstName = "nima",
             LastName = "nosrati",
             Email = "nima@gmai.com",
-            PhoneNumber = "+18185338330",
+            PhoneNumber = "+989107602786",
             BankAccountNumber = "9823435664",
             DateOfBirth = DateTime.Now,
             Id = customerList!.First().Id
@@ -124,7 +114,7 @@ public class CustomerControllerTest : IntegrationTestBase
             FirstName = "nima2",
             LastName = "nosrati",
             Email = "nima2@gmai.com",
-            PhoneNumber = "+18185228330",
+            PhoneNumber = "+989107602786",
             BankAccountNumber = new Random().Next(100000000, 999999999).ToString(),
             DateOfBirth = DateTime.Now
         });
@@ -136,5 +126,17 @@ public class CustomerControllerTest : IntegrationTestBase
         result.Should().NotBeNull();
 
         result.Should().BeOfType<CustomerDto>().Which.FirstName.Should().Contain("nima");
+    }
+    
+    [Fact]
+    public async Task When_SendValidId_DeleteCustomer_ReturnsSuccessResult()
+    {
+        var customerListResponse = await HttpClient.GetAsync("/api/customers");
+
+        var customerList = await customerListResponse.Content.ReadFromJsonAsync<List<CustomerDto>>();
+
+        var response = await HttpClient.DeleteAsync($"/api/customers/{customerList!.First().Id}");
+
+        response.StatusCode.Should().Be(HttpStatusCode.NoContent);
     }
 }

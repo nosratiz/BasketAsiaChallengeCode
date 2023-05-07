@@ -26,7 +26,7 @@ public class AddCustomerPage
 
     IWebElement BtnSave => _driverFixture.Driver.FindElement(By.Id("btnSave"));
 
-    IWebElement BtnBackToHomePage => _driverFixture.Driver.FindElement(By.Id("btnBack"));
+    IWebElement BtnBackToHomePage => _driverFixture.Driver.FindElement(By.Id("lnkHomePage"));
 
     IWebElement LblError201 => _driverFixture.Driver.FindElement(By.Id("lblError-201"));
 

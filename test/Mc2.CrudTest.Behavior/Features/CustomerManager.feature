@@ -27,12 +27,12 @@
             | 202  |
         When user edit customer with new data
           | FirstName | LastName     | Email            | PhoneNumber | DateOfBirth   | BankAccountNumber |
-          | Jane      | William      | jane@william.com | +3161234567 | 01-FEB-2010 | IR000000000000002 |
+          | Jane      | William      | jane@william.com | +989107602786 | 01-FEB-2010 | IR000000000000002 |
         Then user can lookup all customers and filter by below properties and get "0" records
           | FirstName | LastName | Email        | PhoneNumber   | DateOfBirth | BankAccountNumber |
           | John      | Doe      | john@doe.com | +989121234567 | 01-JAN-2000 | IR000000000000001 |
         And user can lookup all customers and filter by below properties and get "1" records
-          | FirstName | LastName | Email            | PhoneNumber | DateOfBirth | BankAccountNumber |
-          | Jane      | William  | jane@william.com | +3161234567 | 01-FEB-2010 | IR000000000000002 |
+          | FirstName | LastName | Email            | PhoneNumber   | DateOfBirth | BankAccountNumber |
+          | Jane      | William  | jane@william.com | +989107602786 | 01-FEB-2010 | IR000000000000002 |
         When user delete customer by email of "jane@william.com"
         Then user can query to get all customers and must have "0" records

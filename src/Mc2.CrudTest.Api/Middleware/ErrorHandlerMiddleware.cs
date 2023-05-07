@@ -1,7 +1,7 @@
 using System.Net;
 using FluentValidation;
-using Mc2.CrudTest.Application.Common.Helper;
 using Mc2.CrudTest.Domain.Exceptions;
+using Mc2.CrudTest.Domain.Helper;
 using Newtonsoft.Json;
 
 namespace Mc2.CrudTest.Api.Middleware;
@@ -25,6 +25,7 @@ public class ErrorHandlerMiddleware
         }
         catch (Exception error)
         {
+            
             var response = context.Response;
             response.ContentType = "application/json";
 
@@ -43,8 +44,14 @@ public class ErrorHandlerMiddleware
                     (int) HttpStatusCode.Unauthorized,
                 _ => (int) HttpStatusCode.InternalServerError
             };
-
-            var result = JsonConvert.SerializeObject(new ApiMessage {Message = error.Message});
+            
+            // it just for perpouse of this test
+            
+            var result = error is BusinessException ?
+                JsonConvert.SerializeObject(error.GetType()
+                    .GetProperty("Errors")?
+                    .GetValue(error, null)) 
+                :JsonConvert.SerializeObject(new ApiMessage {Message = error.Message});
             
             _logger.LogInformation(result);
 

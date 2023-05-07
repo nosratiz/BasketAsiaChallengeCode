@@ -1,9 +1,9 @@
-using Mc2.CrudTest.Application.Common.Helper;
 using Mc2.CrudTest.Application.Customers.Command.Create;
 using Mc2.CrudTest.Application.Customers.Command.Delete;
 using Mc2.CrudTest.Application.Customers.Command.Update;
 using Mc2.CrudTest.Application.Customers.Dto;
 using Mc2.CrudTest.Application.Customers.Queries;
+using Mc2.CrudTest.Domain.Helper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

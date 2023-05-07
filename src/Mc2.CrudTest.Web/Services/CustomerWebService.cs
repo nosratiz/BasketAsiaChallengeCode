@@ -1,3 +1,4 @@
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using Mc2.CrudTest.Web.Dto;
@@ -62,7 +63,8 @@ public class CustomerWebService : ICustomerWebServices
     }
 
 
-    public async Task<CustomerDto?> AddCustomerAsync(CreateCustomerDto customer, CancellationToken cancellationToken)
+    public async Task<CreateCustomerViewModel> AddCustomerAsync(CreateCustomerDto customer,
+        CancellationToken cancellationToken)
     {
         var client = _httpClientFactory.CreateClient("CrudTest");
         var content = new StringContent(JsonSerializer.Serialize(customer), Encoding.UTF8, "application/json");
@@ -71,13 +73,35 @@ public class CustomerWebService : ICustomerWebServices
         {
             var response = await client.PostAsync("api/customers", content, cancellationToken);
 
-            if (response.IsSuccessStatusCode) return null;
+            if (response is {IsSuccessStatusCode: false, StatusCode: HttpStatusCode.BadRequest})
+            {
+                var errorContent = await response.Content.ReadAsStringAsync(cancellationToken);
+
+                var error = JsonSerializer.Deserialize<List<ApiError>>(errorContent, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+                return new CreateCustomerViewModel()
+                {
+                    Errors = error
+                };
+            }
+
+            if (response.IsSuccessStatusCode == false) return null;
+
 
             var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
-            return JsonSerializer.Deserialize<CustomerDto>(responseContent, new JsonSerializerOptions
+            var customerResult = JsonSerializer.Deserialize<CreateCustomerDto>(responseContent,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+            return new CreateCustomerViewModel()
             {
-                PropertyNameCaseInsensitive = true
-            });
+                Customer = customerResult
+            };
         }
         catch (Exception e)
         {

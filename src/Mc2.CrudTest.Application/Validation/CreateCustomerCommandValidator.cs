@@ -2,9 +2,7 @@ using FluentValidation;
 using Mc2.CrudTest.Application.Common.Interfaces;
 using Mc2.CrudTest.Application.Customers.Command.Create;
 using Mc2.CrudTest.Domain.Validators;
-using Mc2.CrudTest.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
-using PhoneNumbers;
 
 namespace Mc2.CrudTest.Application.Validation;
 
@@ -35,7 +33,7 @@ public sealed class CreateCustomerCommandValidator : AbstractValidator<CreateCus
             .MinimumLength(5)
             .MaximumLength(254)
             .MustAsync(BeUniqueEmail)
-            .WithMessage("The specified email already exists.");
+            .WithMessage("The specified email already exists.").WithErrorCode("202");
 
         RuleFor(x => x.PhoneNumber)
             .NotNull()
@@ -59,7 +57,7 @@ public sealed class CreateCustomerCommandValidator : AbstractValidator<CreateCus
 
         RuleFor(x => x)
             .MustAsync(BeUniqueCustomer)
-            .WithMessage("The specified customer already exists.");
+            .WithMessage("The specified customer already exists.").WithErrorCode("201");
     }
 
     private async Task<bool> BeUniqueEmail(string email, CancellationToken cancellationToken)

@@ -19,33 +19,33 @@
 }
 
 
-<form asp-action="EditCustomer" method="Post">
+<form action="/Edit" method="post">
     
     <input type="hidden" asp-for="UpdateCustomer.Id" value="@Model?.Customer?.Id"/>
 
     <div class="mb-3">
            <label for="first-name" class="form-label">First Name</label>
-           <input type="text" class="form-control" id="txtFirstName" asp-for="UpdateCustomer.FirstName">
+           <input type="text" class="form-control" id="txtFirstName" asp-for="UpdateCustomer.FirstName" value="@Model.Customer.FirstName">
        </div>
        <div class="mb-3">
            <label for="last-name" class="form-label">Last Name</label>
-           <input type="text" class="form-control" id="txtLastName" asp-for="UpdateCustomer.LastName">
+           <input type="text" class="form-control" id="txtLastName" asp-for="UpdateCustomer.LastName" value="@Model.Customer.LastName">
        </div>
        <div class="mb-3">
            <label for="email" class="form-label">Email Address</label>
-           <input type="email" class="form-control" id="txtEmail" asp-for="UpdateCustomer.Email">
+           <input type="email" class="form-control" id="txtEmail" asp-for="UpdateCustomer.Email" value="@Model.Customer.Email">
        </div>
        <div class="mb-3">
            <label for="phone" class="form-label">Phone Number</label>
-           <input type="tel" class="form-control" id="txtPhoneNumber" asp-for="UpdateCustomer.PhoneNumber">
+           <input type="tel" class="form-control" id="txtPhoneNumber" asp-for="UpdateCustomer.PhoneNumber" value="@Model.Customer.PhoneNumber">
        </div>
        <div class="mb-3">
            <label for="dob" class="form-label">Date of Birth</label>
-           <input type="date" class="form-control" id="txtDateOfBirth" asp-for="UpdateCustomer.DateOfBirth">
+           <input type="text" class="form-control" id="txtDateOfBirth" asp-for="UpdateCustomer.DateOfBirth" value="@Model.Customer.DateOfBirth">
        </div>
        <div class="mb-3">
            <label for="bank-account" class="form-label">Bank Account Number</label>
-           <input type="text" class="form-control" id="txtBankAccountNumber" asp-for="UpdateCustomer.BankAccountNumber">
+           <input type="text" class="form-control" id="txtBankAccountNumber" asp-for="UpdateCustomer.BankAccountNumber" value="@Model.Customer.BankAccountNumber">
        </div>
        <button type="submit" id="btnSave" class="btn btn-primary">Submit</button>
 </form>

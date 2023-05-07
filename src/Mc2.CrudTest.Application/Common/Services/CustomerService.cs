@@ -5,7 +5,7 @@ using Mc2.CrudTest.Domain.Exceptions;
 using Mc2.CrudTest.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Mc2.CrudTest.Application.Services;
+namespace Mc2.CrudTest.Application.Common.Services;
 
 public class CustomerService : ICustomerService
 {
@@ -19,18 +19,18 @@ public class CustomerService : ICustomerService
     }
 
     public async Task<List<Customer>> GetCustomerListAsync(CancellationToken cancellationToken)
-       => await _context.Customers.ToListAsync(cancellationToken);
+        => await _context.Customers.ToListAsync(cancellationToken);
 
 
     public async Task<Customer?> GetCustomerAsync(Guid id, CancellationToken cancellationToken)
     {
         var customer = await _context
-        .Customers
-        .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+            .Customers
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
         if (customer is null) throw new CustomerNotFoundException(id);
 
-        return  customer;
+        return customer;
     }
 
     public async Task<Customer> AddCustomerAsync(Customer createCustomer, CancellationToken cancellationToken)
@@ -45,12 +45,13 @@ public class CustomerService : ICustomerService
     public async Task<Customer> UpdateCustomerAsync(Customer updateCustomer, CancellationToken cancellationToken)
     {
         var customer = await _context
-        .Customers
-        .FirstOrDefaultAsync(x => x.Id == updateCustomer.Id, cancellationToken);
+            .Customers
+            .FirstOrDefaultAsync(x => x.Id == updateCustomer.Id, cancellationToken);
 
         if (customer is null) throw new CustomerNotFoundException(updateCustomer.Id);
 
-        _mapper.Map(updateCustomer, customer);
+        customer.Update(updateCustomer.FirstName, updateCustomer.LastName, updateCustomer.Email,
+            updateCustomer.PhoneNumber, updateCustomer.BankAccountNumber, updateCustomer.DateOfBirth);
 
         await _context.SaveAsync(cancellationToken);
 
@@ -60,12 +61,23 @@ public class CustomerService : ICustomerService
     public async Task DeleteCustomerAsync(Guid id, CancellationToken cancellationToken)
     {
         var customer = await _context
-       .Customers
-       .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+            .Customers
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
         if (customer is null) throw new CustomerNotFoundException(id);
 
         _context.Customers.Remove(customer);
+
+        await _context.SaveAsync(cancellationToken);
+
+        await Task.CompletedTask;
+    }
+
+    public async Task DeleteAllCustomerAsync(CancellationToken cancellationToken)
+    {
+        var customers = await _context.Customers.ToListAsync(cancellationToken);
+
+        _context.Customers.RemoveRange(customers);
 
         await _context.SaveAsync(cancellationToken);
 

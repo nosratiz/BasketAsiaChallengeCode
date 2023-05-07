@@ -10,6 +10,6 @@ I want to add new customers to the customer list
 
         When I add a customer information like I enter the following customer information:
           | FirstName | LastName | Email             | PhoneNumber  | BankAccountNumber | DateOfBirth |
-          | John      | Doe      | johnDoe@gmail.com | +18185778330 | 1234567890        | 01-03-1993  |
+          | John      | Doe      | johnDoe@gmail.com | +989107602786 | 1234567890        | 01-03-1993  |
 
         Then the customer list should contain 1 customer

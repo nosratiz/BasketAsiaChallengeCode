@@ -4,7 +4,6 @@ using Mc2.CrudTest.Domain.Interfaces;
 using Mc2.CrudTest.Domain.ValueObjects;
 using Moq;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
 
 namespace Mc2.CrudTest.Behavior.Steps;
 
@@ -60,7 +59,7 @@ public class AddCustomerSteps
         _customerService.Setup(x => x.GetCustomerListAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(new List<Customer>
             {
-                new(Guid.NewGuid(), "John", "Doe", new Email("john@example.com"), new PhoneNumber("+18185778330"), "123456789", DateTime.Now)
+                new(Guid.NewGuid(), "John", "Doe", new Email("john@example.com"), new PhoneNumber("+989107602786"), "123456789", DateTime.Now)
             });
 
 

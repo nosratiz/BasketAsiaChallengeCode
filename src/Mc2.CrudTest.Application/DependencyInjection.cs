@@ -1,7 +1,7 @@
 using System.Reflection;
 using FluentValidation;
 using Mc2.CrudTest.Application.Common.Interfaces;
-using Mc2.CrudTest.Application.Services;
+using Mc2.CrudTest.Application.Common.Services;
 using Mc2.CrudTest.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 

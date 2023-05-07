@@ -30,7 +30,10 @@ public class HomeController : Controller
     {
         if (ModelState.IsValid == false) return View(model);
 
-        await _customerWebServices.AddCustomerAsync(model.Customer, cancellationToken);
+        var result = await _customerWebServices.AddCustomerAsync(model.Customer, cancellationToken);
+
+        if (result.Errors != null && result.Errors.Any())
+            return View(result);
 
         return RedirectToAction("Index");
     }
