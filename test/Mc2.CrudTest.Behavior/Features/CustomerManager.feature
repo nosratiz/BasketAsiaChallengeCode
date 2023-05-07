@@ -9,7 +9,7 @@
           | 201  | Duplicate customer by First-name, Last-name, Date-of-Birth |
           | 202  | Duplicate customer by Email address                        |
 
-    @ignore
+    @CreateReadEditDeleteCustomer
     Scenario: Create Read Edit Delete Customer
         Given platform has "0" customers
 	    	When user creates a customer with following data by sending 'Create Customer Command'

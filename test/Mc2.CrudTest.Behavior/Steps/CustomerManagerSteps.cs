@@ -1,3 +1,4 @@
+using Mc2.CrudTest.Behavior.Drivers;
 using TechTalk.SpecFlow;
 
 namespace Mc2.CrudTest.Behavior.Steps;
@@ -6,7 +7,14 @@ namespace Mc2.CrudTest.Behavior.Steps;
 public class CustomerManagerSteps
 {
     private readonly List<ErrorCodes> _errorCodes = new();
-    
+   
+    private readonly IDriverFixture _driverFixture;
+
+    public CustomerManagerSteps(IDriverFixture driverFixture)
+    {
+        _driverFixture = driverFixture;
+    }
+
     [Given(@"system error codes are following")]
     public void GivenSystemErrorCodesAreFollowing(Table table)
     {
