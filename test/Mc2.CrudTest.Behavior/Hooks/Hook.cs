@@ -11,10 +11,10 @@ public sealed class Hook
    
     
     [BeforeScenario("CreateReadEditDeleteCustomer")]
-    public async Task BeforeScenario()
+    public  void BeforeScenario()
     {
-        _apiProcess = Process.Start("dotnet", "run --project src/src/Mc2.CrudTest.Api/Mc2.CrudTest.Api.csproj");
-        _webProcess = Process.Start("dotnet", "run --project src/src/Mc2.CrudTest.Web/Mc2.CrudTest.Web.csproj");
+        _apiProcess = Process.Start("dotnet", "run --project src/Mc2.CrudTest.Api/Mc2.CrudTest.Api.csproj");
+        _webProcess = Process.Start("dotnet", "run --project src/Mc2.CrudTest.Web/Mc2.CrudTest.Web.csproj");
     }
 
     [AfterScenario("CreateReadEditDeleteCustomer")]

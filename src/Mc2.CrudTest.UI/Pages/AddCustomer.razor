@@ -1,0 +1,49 @@
+﻿@page "/addCustomer"
+
+<PageTitle>Counter</PageTitle>
+
+
+<h2>title</h2>
+
+  <a type="button" id="lnkHomePage" class="btn btn-primary" href="@($"/")" >Back</a>
+
+@if (Errors != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @foreach (var error in Errors)
+        {
+            <label id="lblError-@error.Code">@error.Code</label>
+            <br/>
+            @error.Message
+        }
+
+    </div>
+}
+
+<EditForm Model="@Customer" OnValidSubmit="@CreateCustomerAsync"   method="post">
+    <div class="mb-3">
+        <label for="first-name" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="txtFirstName" @bind="Customer.FirstName">
+    </div>
+    <div class="mb-3">
+        <label for="last-name" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="txtLastName" @bind="Customer.LastName">
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" class="form-control" id="txtEmail" @bind="Customer.Email">
+    </div>
+    <div class="mb-3">
+        <label for="phone" class="form-label">Phone Number</label>
+        <input type="tel" class="form-control" id="txtPhoneNumber" @bind="Customer.PhoneNumber">
+    </div>
+    <div class="mb-3">
+        <label for="dob" class="form-label">Date of Birth</label>
+        <input type="text" class="form-control" id="txtDateOfBirth" @bind="Customer.DateOfBirth">
+    </div>
+    <div class="mb-3">
+        <label for="bank-account" class="form-label">Bank Account Number</label>
+        <input type="text" class="form-control" id="txtBankAccountNumber" @bind="Customer.BankAccountNumber">
+    </div>
+    <button class="btn btn-primary" id="btnSave" type="submit">Submit</button>
+</EditForm>

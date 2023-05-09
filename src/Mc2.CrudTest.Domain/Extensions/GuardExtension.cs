@@ -1,7 +1,6 @@
 using Ardalis.GuardClauses;
 using Mc2.CrudTest.Domain.Exceptions;
 using Mc2.CrudTest.Domain.Validators;
-using PhoneNumbers;
 
 namespace Mc2.CrudTest.Domain.Extensions;
 

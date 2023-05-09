@@ -33,7 +33,7 @@ public sealed class CreateCustomerCommandHandler : IRequestHandler<CreateCustome
         {
             var errors = validationResult
                 .Errors
-                .Select(x => new ApiMessage(x.ErrorCode ?? "400", x.ErrorMessage))
+                .Select(x => new ApiMessage(x.ErrorCode, x.ErrorMessage))
                 .ToList();
 
             throw new BusinessException(errors);

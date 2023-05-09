@@ -1,0 +1,41 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<div class="text-center">
+
+    <a type="button" id="lnkAddCustomer" class="btn btn-primary" href="@($"AddCustomer")">Add Customer</a>
+
+    <table id="tblCustomers" class="table table-striped">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email Address</th>
+            <th>Phone Number</th>
+            <th>Date of Birth</th>
+            <th>Bank Account Number</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var customer in Customers)
+        {
+            <tr>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+                <td>@customer.Email</td>
+                <td>@customer.PhoneNumber</td>
+                <td>@customer.DateOfBirth</td>
+                <td>@customer.BankAccountNumber</td>
+                <td>
+                    <a type="button" class="btn btn-primary" id="btnEdit" onclick="@(()=> EditCustomer(customer.Id))" >Edit</a>
+        
+                    <button type="button" class="btn btn-danger" id="btnDelete" onclick="@(() => DeleteCustomerAsync(customer.Id))"  >Delete</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+</div>

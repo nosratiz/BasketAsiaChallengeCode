@@ -1,7 +1,5 @@
-using Mc2.CrudTest.Application.Common.Services;
 using Mc2.CrudTest.Behavior.Drivers;
 using Mc2.CrudTest.Behavior.Support;
-using Mc2.CrudTest.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using SolidToken.SpecFlow.DependencyInjection;
 

@@ -3,7 +3,6 @@ using FluentValidation;
 using Mc2.CrudTest.Application.Customers.Dto;
 using Mc2.CrudTest.Domain.Entities;
 using Mc2.CrudTest.Domain.Interfaces;
-using Mc2.CrudTest.Domain.ValueObjects;
 using MediatR;
 
 namespace Mc2.CrudTest.Application.Customers.Command.Update;

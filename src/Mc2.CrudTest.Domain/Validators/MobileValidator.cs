@@ -10,13 +10,10 @@ public static class MobileValidator
         
         try
         {
-            var number = phoneUtil.Parse(phoneNumber, null);
-            var phoneNumberType = phoneUtil.GetNumberType(number);
+            var number = phoneUtil.Parse(phoneNumber,null);
+            
+            return phoneUtil.IsValidNumber(number);
 
-            if (phoneNumberType == PhoneNumberType.MOBILE)
-                return true;
-
-            return false;
         }
         catch (NumberParseException)
         {
