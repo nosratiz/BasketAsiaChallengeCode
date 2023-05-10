@@ -18,6 +18,14 @@ services:
       depends_on:
          - db
 
+   ui:
+      build: ./src/Mc2.CrudTest.UI
+      ports:
+         - "5006:80"
+      restart: unless-stopped
+      depends_on:
+         - api
+
 
 
 

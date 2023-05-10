@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  selector:
+    matchLabels:
+      app: api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api
+        image: nosratiz/mc2test
+        ports:
+        - containerPort: 80
+        env:
+        - name:  ConnectionStrings__McTestContext
+          value: "Server=db;Initial Catalog =McTestContext;MultipleActiveResultSets=true;User ID=sa;Password=123qweWE;Max Pool Size=1000;Pooling=true;Encrypt=False"
+        - name: db
+          value: "db"
+
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi

@@ -31,6 +31,6 @@ public partial class Index
     private async Task DeleteCustomerAsync(Guid id)
     {
         await CustomerWebServices.DeleteCustomerAsync(id, CancellationToken.None);
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo("/",true);
     }
 }

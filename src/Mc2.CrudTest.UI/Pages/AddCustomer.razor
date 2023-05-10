@@ -21,6 +21,9 @@
 }
 
 <EditForm Model="@Customer" OnValidSubmit="@CreateCustomerAsync"   method="post">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    
     <div class="mb-3">
         <label for="first-name" class="form-label">First Name</label>
         <input type="text" class="form-control" id="txtFirstName" @bind="Customer.FirstName">

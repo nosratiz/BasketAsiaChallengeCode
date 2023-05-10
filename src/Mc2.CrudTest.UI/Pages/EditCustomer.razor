@@ -6,7 +6,8 @@
 
 
 <EditForm Model="@Customer" OnValidSubmit="@UpdateCustomerAsync"   method="post">
-
+    <DataAnnotationsValidator />
+    <ValidationSummary />
     <input type="hidden" id="txtId" @bind="Customer.Id" />
     <div class="mb-3">
         <label for="first-name" class="form-label">First Name</label>
