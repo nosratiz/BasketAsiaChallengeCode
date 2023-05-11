@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: db
+  name: "{{ .Values.deploymentdb.name }}"
 spec:
   selector:
     matchLabels:
-      app: db
+      app: "{{ .Values.deploymentdb.name }}"
   replicas: 1
   template:
     metadata:
       labels:
-        app: db
+        app: "{{ .Values.deploymentdb.name }}"
     spec:
       containers:
-      - name: db
-        image: mcr.microsoft.com/mssql/server:2022-latest
+      - name: "{{ .Values.deploymentdb.name }}"
+        image: "{{ .Values.deploymentdb.image }}:{{ .Values.deploymentdb.tag }}}}"
         env:
         - name: ACCEPT_EULA
           value: "Y"

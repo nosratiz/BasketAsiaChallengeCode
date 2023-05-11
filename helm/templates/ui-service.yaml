@@ -4,7 +4,7 @@ metadata:
   name: ui-service
 spec:
   selector:
-    app: ui
+    app: "{{ .Values.deploymentui.name }}"
   ports:
   - name: http
     port: 5006

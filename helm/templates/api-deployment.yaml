@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api
+  name: "{{ .Values.deploymentapi.name}}"
 spec:
   selector:
     matchLabels:
-      app: api
+      app: "{{ .Values.deploymentapi.name}}"
   replicas: 1
   template:
     metadata:
       labels:
-        app: api
+        app: "{{ .Values.deploymentapi.name}}"
     spec:
       containers:
-      - name: api
-        image: nosratiz/mc2test
+      - name: "{{ .Values.deploymentapi.name}}"
+        image: {{ .Values.deploymentapi.image }}:{{ .Values.deploymentapi.tag }}
         ports:
         - containerPort: 80
         env:

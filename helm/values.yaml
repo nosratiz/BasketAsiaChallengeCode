@@ -1,0 +1,19 @@
+deploymentapi:
+  image: "nosratiz/mc2test"
+  tag: "latest"
+  pullPolicy: "Always"
+  name: api
+
+
+deploymentui:
+  image: "nosratiz/mc2testui"
+  tag: "latest"
+  pullPolicy: "Always"
+  name: ui
+
+
+
+deploymentdb:
+ image: "mcr.microsoft.com/mssql/server:2022-latest"
+ tag: "latest"
+ name: db
